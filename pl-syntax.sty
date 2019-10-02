@@ -15,34 +15,34 @@
 {%
   % Define a new syntactic category (e.g. expressions, statements).
   \newcommand{\category}[2][]{%
-    \newRow \textrm{##1} & ##2 & ::= &%
+    \@newRow \textrm{##1} & ##2 & ::= &%
     \@syntax@firstAlternativetrue%
   }%
   % A category with no right-hand side. This allows you to name meta
   % variables without defining the syntactic category explicitly.
   \newcommand{\abstractCategory}[2][]{%
-    \newRow \textrm{##1} & ##2%
+    \@newRow \textrm{##1} & ##2%
     \@syntax@firstAlternativetrue%
   }%
   % Define a new alternative for the most recent category.
   \newcommand{\alternative}[1]{%
-    \alt ##1%
+    \@alt ##1%
     \@syntax@firstAlternativefalse%
   }%
   % Like `alternative`, but places the clause on a new line.
   \newcommand{\alternativeLine}[1]{%
-    \newRow & & \alt & ##1%
+    \@newRow & & \@alt & ##1%
     \@syntax@firstAlternativefalse%
   }%
   % Add extra information to the most recently declared alternative.
   % For example, you can use this to note that the context is unordered.
-  \newcommand{\note}[1]{\newRow & & & (\textrm{##1})}%
+  \newcommand{\note}[1]{\@newRow & & & (\textrm{##1})}%
   % Add vertical space between declarations.
   \newcommand{\separate}[1][1ex]{\\[##1]\@syntax@suppressNewRowtrue}
   % Symbol used between alternatives.
-  \newcommand{\alt}{\if@syntax@firstAlternative \else \,\mid\, \fi}
+  \newcommand{\@alt}{\if@syntax@firstAlternative \else \,\mid\, \fi}
   % Start a new row.
-  \newcommand{\newRow}{\if@syntax@suppressNewRow \@syntax@suppressNewRowfalse \else \\ \fi}
+  \newcommand{\@newRow}{\if@syntax@suppressNewRow \@syntax@suppressNewRowfalse \else \\ \fi}
 %
   \[\begin{array}{llcl}\@syntax@suppressNewRowtrue\ignorespaces%
 }
