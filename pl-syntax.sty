@@ -24,6 +24,11 @@
     \@newRow \textrm{##1} & ##2%
     \@syntax@firstAlternativetrue%
   }%
+  % A category where the right-hand side is an abstract set.
+  \newcommand{\categoryFromSet}[3][]{%
+    \@newRow \textrm{##1} & ##2 & \in & ##3%
+    \@syntax@firstAlternativetrue%
+  }%
   % Define a new alternative for the most recent category.
   \newcommand{\alternative}[1]{%
     \@alt ##1%
