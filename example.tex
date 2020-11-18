@@ -19,13 +19,17 @@ the following is generated.
   \begin{syntax}
     % Define a syntactic category with no right-hand side.
     \abstractCategory[Variables]{x, y, z}
-    
+
+    % Define a syntactic category from a set
+    \categoryFromSet[Naturals]{n}{\mathbf{N}}
+
     % Start a category definition. Optional input is the category
     % description, the other declares the meta variable(s) you will
     % use to refer to this category.
     \category[Expressions]{e}
-    % Each alternative is introduces in a new line.
+    % Each alternative is introduced in a new line.
     \alternative{x}
+    \alternative{n}
     \alternative{\lambda x . e}
     \alternative{e_1 e_2}
 
@@ -52,6 +56,6 @@ the following is generated.
 
   \caption{Terms and Types of the Simply Typed Lambda Calculus}
   \label{fig:abstract-syntax}
-\end{figure}  
+\end{figure}
 
 \end{document}
