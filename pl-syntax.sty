@@ -52,7 +52,9 @@
   }%
   % Like `alternative`, but places the clause on a new line.
   \newcommand{\alternativeLine}[1]{%
-    \@pl@syntax@newRow & & \@pl@syntax@alt & ##1%
+    \iftoggle{@pl@syntax@firstAlternative}%
+      {\alternative{##1}}%
+      {\@pl@syntax@newRow & & \@pl@syntax@alt & ##1}%
   }%
   % Add extra information to the most recently declared alternative.
   % For example, you can use this to note that the context is unordered.
