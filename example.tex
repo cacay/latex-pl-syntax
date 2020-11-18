@@ -27,7 +27,7 @@ the following is generated.
     % description, the other declares the meta variable(s) you will
     % use to refer to this category.
     \category[Expressions]{e}
-    % Each alternative is introduced in a new line.
+    % Each alternative is introduced in its own line.
     \alternative{x}
     \alternative{n}
     \alternative{\lambda x . e}
@@ -52,6 +52,18 @@ the following is generated.
     % definitions if you don't want to use BNF.
     \note{no repeats}
     \note{unordered}
+
+
+    % Alternative layout if you want more space.
+    \category[Expressions]{e}
+    \groupleft{
+      \alternative{x}
+      \alternative{n}
+    }
+    \groupleft{
+      \alternative{\lambda x . e}
+      \alternative{e_1 e_2}
+    }
   \end{syntax}
 
   \caption{Terms and Types of the Simply Typed Lambda Calculus}

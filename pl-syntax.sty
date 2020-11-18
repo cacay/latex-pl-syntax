@@ -30,8 +30,7 @@
 }
 
 % Define the abstract syntax of a programming language.
-\newenvironment{syntax}
-{%
+\newenvironment{syntax}{%
   % Define a new syntactic category (e.g. expressions, statements).
   \newcommand{\category}[2][]{%
     \@pl@syntax@newRow \textrm{##1} & ##2 & ::= &%
@@ -63,9 +62,17 @@
   \newcommand{\separate}[1][1ex]{%
     \\[##1]\global\toggletrue{@pl@syntax@suppressNewRow}%
   }%
+  % For grouping alternatives on a new line and aligning right.
+  \newcommand{\groupleft}[1]{%
+    \\%
+    \multicolumn{4}{l}{%
+      \togglefalse{@pl@syntax@firstAlternative}%
+      \qquad%
+      ##1%
+    }%
+  }
 %
-  \begingroup%
   \global\toggletrue{@pl@syntax@suppressNewRow}%
   \[\begin{array}{llcl}%
 }
-{\end{array}\]\endgroup\ignorespacesafterend}
+{\end{array}\]\ignorespacesafterend}
