@@ -20,14 +20,14 @@ the following is generated.
     % Define a syntactic category with no right-hand side.
     \abstractCategory[Variables]{x, y, z}
 
-    % Define a syntactic category from a set
+    % Define a syntactic category from a set.
     \categoryFromSet[Naturals]{n}{\mathbf{N}}
 
     % Start a category definition. Optional input is the category
     % description, the other declares the meta variable(s) you will
     % use to refer to this category.
     \category[Expressions]{e}
-    % Each alternative is introduced in its own line.
+    % Each alternative is introduced on its own line.
     \alternative{x}
     \alternative{n}
     \alternative{\lambda x . e}
@@ -42,9 +42,11 @@ the following is generated.
     % \separate[5ex]
 
     \category[Types]{\tau}
-    \alternativeLine{\mathbf{Nat}}
+    \\
+    \alternative{\mathbf{Nat}}
     % You can place alternatives on a new line.
-    \alternativeLine{\tau_1 \rightarrow \tau_2}
+    \\
+    \alternative{\tau_1 \rightarrow \tau_2}
 
     \category[Contexts]{\Gamma}
     \alternative{x_1 : \tau_1, \ldots, x_n : \tau_n}
