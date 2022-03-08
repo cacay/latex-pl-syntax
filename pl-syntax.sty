@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{pl-syntax}
-  [2019/04/22 version 2.0.0 Abstract Syntax Definitions for Programming Languages]
+  [2019/04/22 version 2.1.0 Abstract Syntax Definitions for Programming Languages]
 
 \RequirePackage{environ}
 \RequirePackage{etoolbox}
@@ -13,8 +13,8 @@
 % very first alternative.
 \newtoggle{@pl@syntax@suppressAlt}
 
-% Suppresses column separators when set to true. Set to true after the
-% first alternative on a row.
+% Suppresses column separators when set to true. Set after the first
+% alternative on a row.
 \newtoggle{@pl@syntax@suppressColumns}
 
 % The symbol used between alternatives.
@@ -71,16 +71,44 @@
   \newcommand{\separate}[1][1ex]{%
     \\[##1]\global\toggletrue{@pl@syntax@suppressNewRow}%
   }%
-  % For grouping alternatives on a new line and aligning left.
+  % Group categories or alternatives on a new line and align left.
   \newcommand{\groupleft}[1]{%
-    \\%
+    % This doesn't work because \multiline expects an empty line.
+    % \@pl@syntax@newRow%
+    % So we have to duplicate some code.
+    \iftoggle{@pl@syntax@suppressNewRow}{}{\\}%
     \multicolumn{4}{l}{%
-      \toggletrue{@pl@syntax@suppressColumns}%
-      \qquad%
+      \global\togglefalse{@pl@syntax@suppressNewRow}
+      \renewcommand{\@pl@syntax@alt}{\@pl@syntax@grouped@alt}%
+      \renewcommand{\category}{\@pl@syntax@grouped@category}%
+      \renewcommand{\abstractCategory}{\@pl@syntax@grouped@abstractCategory}%
+      \renewcommand{\categoryFromSet}{\@pl@syntax@grouped@categoryFromSet}%
       ##1%
     }%
-  }
+  }%
 %
   \global\toggletrue{@pl@syntax@suppressNewRow}%
   \[\begin{array}{llcl}\BODY\end{array}\]%
+}
+
+\newcommand{\@pl@syntax@grouped@alt}{%
+  \iftoggle{@pl@syntax@suppressColumns}{}{\qquad}%
+  \iftoggle{@pl@syntax@suppressAlt}%
+    {\togglefalse{@pl@syntax@suppressAlt}}%
+    {\@pl@syntax@altSymbol}%
+  \toggletrue{@pl@syntax@suppressColumns}%
+}
+
+\newcommand{\@pl@syntax@grouped@category}[2][]{%
+  \textrm{#1 } #2 ::=%
+  \toggletrue{@pl@syntax@suppressAlt}%
+  \toggletrue{@pl@syntax@suppressColumns}%
+}
+
+\newcommand{\@pl@syntax@grouped@abstractCategory}[2][]{%
+  \textrm{#1 } #2%
+}
+
+\newcommand{\@pl@syntax@grouped@categoryFromSet}[3][]{%
+  \textrm{#1 } #2 \in #3%
 }

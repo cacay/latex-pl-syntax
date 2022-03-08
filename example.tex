@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage{amsfonts}
 \usepackage{pl-syntax}
 
 
@@ -21,7 +22,7 @@ the following is generated.
     \abstractCategory[Variables]{x, y, z}
 
     % Define a syntactic category from a set.
-    \categoryFromSet[Naturals]{n}{\mathbf{N}}
+    \categoryFromSet[Naturals]{n}{\mathbb{N}}
 
     % Start a category definition. Optional input is the category
     % description, the other declares the meta variable(s) you will
@@ -42,7 +43,6 @@ the following is generated.
     % \separate[5ex]
 
     \category[Types]{\tau}
-    \\
     \alternative{\mathbf{Nat}}
     % You can place alternatives on a new line.
     \\
@@ -72,4 +72,21 @@ the following is generated.
   \label{fig:abstract-syntax}
 \end{figure}
 
+It is possible to group multiple definition on one line:
+\begin{syntax}
+  \groupleft{
+    \abstractCategory[Variables]{x, y, z}
+    \hfill
+    \quad
+    \categoryFromSet[Naturals]{n}{\mathbb{N}}
+    \quad
+    \hfill
+    \category[Expressions]{e}
+    \alternative{x}
+    \alternative{n}
+    \alternative{\lambda x . e}
+    \alternative{e_1 e_2}
+  }
+
+\end{syntax}
 \end{document}
