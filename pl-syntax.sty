@@ -2,6 +2,7 @@
 \ProvidesPackage{pl-syntax}
   [2019/04/22 version 2.0.0 Abstract Syntax Definitions for Programming Languages]
 
+\RequirePackage{environ}
 \RequirePackage{etoolbox}
 
 % Suppresses row breaks when set to true. Used to prevent unnecessary
@@ -43,7 +44,7 @@
 }
 
 % Define the abstract syntax of a programming language.
-\newenvironment{syntax}{%
+\NewEnviron{syntax}{%
   % Define a new syntactic category (e.g. expressions, statements).
   \newcommand{\category}[2][]{%
     \@pl@syntax@newRow \textrm{##1} & ##2 & ::= &%
@@ -70,7 +71,7 @@
   \newcommand{\separate}[1][1ex]{%
     \\[##1]\global\toggletrue{@pl@syntax@suppressNewRow}%
   }%
-  % For grouping alternatives on a new line and aligning right.
+  % For grouping alternatives on a new line and aligning left.
   \newcommand{\groupleft}[1]{%
     \\%
     \multicolumn{4}{l}{%
@@ -81,6 +82,5 @@
   }
 %
   \global\toggletrue{@pl@syntax@suppressNewRow}%
-  \[\begin{array}{llcl}%
+  \[\begin{array}{llcl}\BODY\end{array}\]%
 }
-{\end{array}\]\ignorespacesafterend}
