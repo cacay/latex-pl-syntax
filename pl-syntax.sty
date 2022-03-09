@@ -69,7 +69,7 @@
   \newcommand{\note}[1]{\@pl@syntax@newRow & & & (\textrm{##1})}%
   % Add vertical space between declarations.
   \newcommand{\separate}[1][1ex]{%
-    \\[##1]\global\toggletrue{@pl@syntax@suppressNewRow}%
+    \global\toggletrue{@pl@syntax@suppressNewRow}\\[##1]%
   }%
   % Group categories or alternatives on a new line and align left.
   \newcommand{\groupleft}[1]{%
