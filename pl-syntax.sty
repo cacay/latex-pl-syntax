@@ -43,36 +43,45 @@
     }%
 }
 
+% Declare a command whether or not it is already declared.
+\newcommand*{\@pl@syntax@newcommand}{%
+  \@star@or@long\@pl@syntax@new@command%
+}
+\newcommand*{\@pl@syntax@new@command}[1]{%
+  \provide@command{#1}{}%
+  \renew@command{#1}%
+}
+
 % Define the abstract syntax of a programming language.
 \NewEnviron{syntax}{%
   % Define a new syntactic category (e.g. expressions, statements).
-  \newcommand{\category}[2][]{%
+  \@pl@syntax@newcommand{\category}[2][]{%
     \@pl@syntax@newRow \textrm{##1} & ##2 & ::= &%
     \toggletrue{@pl@syntax@suppressAlt}%
     \toggletrue{@pl@syntax@suppressColumns}%
   }%
   % A category with no right-hand side. This allows you to name meta
   % variables without defining the syntactic category explicitly.
-  \newcommand{\abstractCategory}[2][]{%
+  \@pl@syntax@newcommand{\abstractCategory}[2][]{%
     \@pl@syntax@newRow \textrm{##1} & ##2%
   }%
   % A category where the right-hand side is an abstract set.
-  \newcommand{\categoryFromSet}[3][]{%
+  \@pl@syntax@newcommand{\categoryFromSet}[3][]{%
     \@pl@syntax@newRow \textrm{##1} & ##2 & \in & ##3%
   }%
   % Define a new alternative for the most recent category.
-  \newcommand{\alternative}[1]{%
+  \@pl@syntax@newcommand{\alternative}[1]{%
     \@pl@syntax@alt ##1%
   }%
   % Add extra information to the most recently declared alternative.
   % For example, you can use this to note that the context is unordered.
-  \newcommand{\note}[1]{\@pl@syntax@newRow & & & (\textrm{##1})}%
+  \@pl@syntax@newcommand{\note}[1]{\@pl@syntax@newRow & & & (\textrm{##1})}%
   % Add vertical space between declarations.
-  \newcommand{\separate}[1][1ex]{%
+  \@pl@syntax@newcommand{\separate}[1][1ex]{%
     \global\toggletrue{@pl@syntax@suppressNewRow}\\[##1]%
   }%
   % Group categories or alternatives on a new line and align left.
-  \newcommand{\groupleft}[1]{%
+  \@pl@syntax@newcommand{\groupleft}[1]{%
     % This doesn't work because \multiline expects an empty line.
     % \@pl@syntax@newRow%
     % So we have to duplicate some code.
