@@ -90,7 +90,7 @@
     % \@pl@syntax@newRow%
     % So we have to duplicate some code.
     \iftoggle{@pl@syntax@suppressNewRow}{}{\\}%
-    \multicolumn{4}{l}{%
+    \multicolumn{4}{@{}l@{}}{%
       \global\togglefalse{@pl@syntax@suppressNewRow}
       \renewcommand{\@pl@syntax@alt}{\@pl@syntax@grouped@alt}%
       \renewcommand{\category}{\@pl@syntax@grouped@category}%
@@ -101,7 +101,7 @@
   }%
 %
   \global\toggletrue{@pl@syntax@suppressNewRow}%
-  \[\begin{array}{llcl}\BODY\end{array}\]%
+  \[\begin{array}{@{}llcl@{}}\BODY\end{array}\]%
 }
 
 \newcommand{\@pl@syntax@grouped@alt}{%
